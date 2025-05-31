@@ -15,7 +15,6 @@ import difflib
 app = Flask(__name__, template_folder='templates')
 
 # ---------------------- API Key ----------------------
-import os
 NEWSDATA_API_KEY = os.environ.get("NEWSDATA_API_KEY", "")
 
 # ---------------------- Load Models ----------------------
@@ -32,7 +31,7 @@ EMBEDDER_ZIP_PATH = os.path.join('ml-model', 'embedding_model2.zip')
 if not os.path.exists(EMBEDDER2_DIR):
     print("[INFO] embedding_model2 not found. Downloading from Google Drive...")
     gdown.download(
-        url="https://drive.google.com/file/d/171x5kcV2ST-8uYzn2U78t_aZkbnJeNPg/view?usp=sharing",
+        url="https://drive.google.com/uc?export=download&id=171x5kcV2ST-8uYzn2U78t_aZkbnJeNPg",
         output=EMBEDDER_ZIP_PATH,
         quiet=False
     )
@@ -162,5 +161,7 @@ def predict():
         match_count=match_count
     )
 
+# ---------------------- Entry Point ----------------------
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)

@@ -14,18 +14,19 @@ import difflib
 
 app = Flask(__name__, template_folder='templates')
 
-# ---------------------- Load API Key from ENV ----------------------
-NEWSDATA_API_KEY = os.environ.get("NEWSDATA_API_KEY")
+# ---------------------- API Key ----------------------
+import os
+NEWSDATA_API_KEY = os.environ.get("NEWSDATA_API_KEY", "")
 
 # ---------------------- Load Models ----------------------
-MODEL1_PATH = os.path.join(os.path.dirname(__file__), '..', 'ml-model', 'fake_news_model.pkl')
-VECTORIZER1_PATH = os.path.join(os.path.dirname(__file__), '..', 'ml-model', 'vectorizer.pkl')
+MODEL1_PATH = os.path.join('ml-model', 'fake_news_model.pkl')
+VECTORIZER1_PATH = os.path.join('ml-model', 'vectorizer.pkl')
 model1 = joblib.load(MODEL1_PATH)
 vectorizer1 = joblib.load(VECTORIZER1_PATH)
 
-MODEL2_PATH = os.path.join(os.path.dirname(__file__), '..', 'ml-model', 'model2.pkl')
-EMBEDDER2_DIR = os.path.join(os.path.dirname(__file__), '..', 'ml-model', 'embedding_model2')
-EMBEDDER_ZIP_PATH = os.path.join(os.path.dirname(__file__), '..', 'ml-model', 'embedding_model2.zip')
+MODEL2_PATH = os.path.join('ml-model', 'model2.pkl')
+EMBEDDER2_DIR = os.path.join('ml-model', 'embedding_model2')
+EMBEDDER_ZIP_PATH = os.path.join('ml-model', 'embedding_model2.zip')
 
 # Auto-download embedding model if missing
 if not os.path.exists(EMBEDDER2_DIR):
@@ -36,7 +37,7 @@ if not os.path.exists(EMBEDDER2_DIR):
         quiet=False
     )
     with zipfile.ZipFile(EMBEDDER_ZIP_PATH, 'r') as zip_ref:
-        zip_ref.extractall(os.path.join(os.path.dirname(__file__), '..', 'ml-model'))
+        zip_ref.extractall('ml-model')
     print("[INFO] embedding_model2 downloaded and extracted.")
 
 model2 = joblib.load(MODEL2_PATH)

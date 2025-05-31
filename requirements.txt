@@ -7,3 +7,4 @@ deep-translator
 langdetect
 numpy
 requests
+scikit-learn==1.2.2

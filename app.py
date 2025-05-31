@@ -32,7 +32,7 @@ EMBEDDER_ZIP_PATH = os.path.join('ml-model', 'embedding_model2.zip')
 if not os.path.exists(EMBEDDER2_DIR):
     print("[INFO] embedding_model2 not found. Downloading from Google Drive...")
     gdown.download(
-        url="https://drive.google.com/uc?export=download&id=171x5kcV2ST-8uYzn2U78t_aZkbnJeNPg",
+        url="https://drive.google.com/file/d/171x5kcV2ST-8uYzn2U78t_aZkbnJeNPg/view?usp=sharing",
         output=EMBEDDER_ZIP_PATH,
         quiet=False
     )

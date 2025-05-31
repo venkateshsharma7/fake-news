@@ -14,8 +14,8 @@ import difflib
 
 app = Flask(__name__, template_folder='templates')
 
-# ---------------------- API Key ----------------------
-NEWSDATA_API_KEY = "pub_7524f0e7875e4066b380bf4a7aefb00d"
+# ---------------------- Load API Key from ENV ----------------------
+NEWSDATA_API_KEY = os.environ.get("NEWSDATA_API_KEY")
 
 # ---------------------- Load Models ----------------------
 MODEL1_PATH = os.path.join(os.path.dirname(__file__), '..', 'ml-model', 'fake_news_model.pkl')
